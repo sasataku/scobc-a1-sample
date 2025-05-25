@@ -1,0 +1,4 @@
+# Copyright (c) 2025 Space Cubics, LLC.
+# SPDX-License-Identifier: Apache-2.0
+
+rsource "drivers/i2c/Kconfig"
