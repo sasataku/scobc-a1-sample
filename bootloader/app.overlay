@@ -1,0 +1,13 @@
+#include <freq.h>
+#include <mem.h>
+
+/delete-node/ &hrmem;
+
+/ {
+	soc {
+		hrmem: memory@0 {
+			compatible = "sc,hrmem";
+			reg = <0x00000000 DT_SIZE_K(32)>;
+		};
+	};
+};
