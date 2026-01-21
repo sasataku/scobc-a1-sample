@@ -7,67 +7,19 @@
 		zephyr,canbus = &can0;
 	};
 
-	aliases {
-		led0 = &user_led_0;
-		sw0 = &user_sw_0;
-	};
-
-	leds {
-		compatible = "gpio-leds";
-		user_led_0: led_0 {
-			gpios = <&gpio0 15 GPIO_ACTIVE_LOW>;
-		};
-	};
-
-	buttons {
-		compatible = "gpio-keys";
-		user_sw_0: sw_0 {
-			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
-			zephyr,code = <INPUT_KEY_0>;
-		};
-	};
-
 	soc {
-		uartlite1: uartlite@50000000 {
-			compatible = "xlnx,xps-uartlite-1.00.a";
+		uio1: gpio@50000000 {
+			compatible = "xlnx,xps-gpio-1.00.a";
 			interrupts = <16 0>;
 			reg = <0x50000000 0x10000>;
+			gpio-controller;
+			#gpio-cells = <2>;
 		};
 
-		uartlite2: uartlite@50010000 {
-			compatible = "xlnx,xps-uartlite-1.00.a";
+		uio2: gpio@50010000 {
+			compatible = "xlnx,xps-gpio-1.00.a";
 			interrupts = <17 0>;
 			reg = <0x50010000 0x10000>;
-		};
-
-		uartlite3: uartlite@50020000 {
-			compatible = "xlnx,xps-uartlite-1.00.a";
-			interrupts = <18 0>;
-			reg = <0x50020000 0x10000>;
-		};
-
-		uartlite4: uartlite@50030000 {
-			compatible = "xlnx,xps-uartlite-1.00.a";
-			interrupts = <19 0>;
-			reg = <0x50030000 0x10000>;
-		};
-
-		uartlite5: uartlite@50040000 {
-			compatible = "xlnx,xps-uartlite-1.00.a";
-			interrupts = <20 0>;
-			reg = <0x50040000 0x10000>;
-		};
-
-		uartlite6: uartlite@50050000 {
-			compatible = "xlnx,xps-uartlite-1.00.a";
-			interrupts = <21 0>;
-			reg = <0x50050000 0x10000>;
-		};
-
-		gpio0: gpio@50090000 {
-			compatible = "xlnx,xps-gpio-1.00.a";
-			interrupts = <25 0>;
-			reg = <0x50090000 0x10000>;
 			gpio-controller;
 			#gpio-cells = <2>;
 		};
@@ -76,24 +28,6 @@
 			compatible = "sc,i2c";
 			interrupts = <7 0>;
 			reg = <0x4f030000 0x10000>;
-			#address-cells = <1>;
-			#size-cells = <0>;
-			clock-frequency = <I2C_BITRATE_STANDARD>;
-		};
-
-		i2c1: i2c@50060000 {
-			compatible = "sc,i2c";
-			interrupts = <22 0>;
-			reg = <0x50060000 0x10000>;
-			#address-cells = <1>;
-			#size-cells = <0>;
-			clock-frequency = <I2C_BITRATE_STANDARD>;
-		};
-
-		i2c2: i2c@50070000 {
-			compatible = "sc,i2c";
-			interrupts = <23 0>;
-			reg = <0x50070000 0x10000>;
 			#address-cells = <1>;
 			#size-cells = <0>;
 			clock-frequency = <I2C_BITRATE_STANDARD>;
@@ -112,17 +46,6 @@
 			can-transceiver {
 				max-bitrate = <1000000>;
 			};
-		};
-
-		spi0: spi@50080000 {
-			compatible = "xlnx,xps-spi-2.00.a";
-			reg = <0x50080000 0x10000>;
-			interrupts = <24 0>;
-			#address-cells = <1>;
-			#size-cells = <0>;
-
-			xlnx,num-ss-bits = <0x3>;
-			xlnx,num-transfer-bits = <0x8>;
 		};
 	};
 };
